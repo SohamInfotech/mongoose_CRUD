@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/createdata" method="post">
+      <input type="hidden" name="id" value="<%= (update ? update._id : "") %>" />
+      <table border="">
+          <tr>
+              <td>First Name:</td>
+              <td><input type="text" id="f_name" name="f_name" value="<%= (update ? update.f_name : "") %>" /><br /><br /></td>
+          </tr>
+          <tr>
+              <td>Last Name:</td>
+              <td><input type="text" id="l_name" name="l_name" value="<%= (update ? update.l_name : "") %>" /><br /><br /></td>
+          </tr>
+          <tr>
+              <td>Gender:</td>
+              <td>
+                  <input type="radio" name="gender" value="male" <%= (update && update.gender === 'male' ? 'checked' : '') %> /> Male
+                  <input type="radio" name="gender" value="female" <%= (update && update.gender === 'female' ? 'checked' : '') %> /> Female<br /><br />
+              </td>
+          </tr>
+          <tr>
+              <td>Hobby:</td>
+              <td>
+                  <input type="checkbox" name="hobby" value="cricket" <%= (update && update.hobby ==='cricket'? 'checked' : '') %> /> Cricket
+                  <input type="checkbox" name="hobby" value="hockey" <%= (update && update.hobby === 'hockey'? 'checked' : '') %> /> Hockey
+                  <input type="checkbox" name="hobby" value="football" <%= (update && update.hobby ==='football' ? 'checked' : '') %> /> Football
+                  <input type="checkbox" name="hobby" value="kabaddi" <%= (update && update.hobby === 'kabaddi' ? 'checked' : '') %> /> Kabaddi
+                  <input type="checkbox" name="hobby" value="wrestling" <%= (update && update.hobby=== 'wrestling'? 'checked' : '') %> /> Write Poetry
+              </td>
+          </tr>
+          <tr>
+              <td>City:</td>
+              <td>
+                  <select id="city" name="city">
+                      <option value="surat" <%= (update && update.city === 'surat' ? 'selected' : '') %>>Surat</option>
+                      <option value="ahmedabad" <%= (update && update.city === 'ahmedabad' ? 'selected' : '') %>>Dwarka</option>
+                      <option value="vadodara" <%= (update && update.city === 'vadodara' ? 'selected' : '') %>>Vadodara</option>
+                      <option value="bhavnagar" <%= (update && update.city === 'bhavnagar' ? 'selected' : '') %>>Amreli</option>
+                  </select>
+              </td>
+          </tr>
+          <tr>
+              <td><button type="submit">Submit</button></td>
+          </tr>
+      </table>
+  </form>
+  
+</table>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Gender</th>
+          <th>Hobby</th>
+          <th>City</th>
+          <th>DELETE</th>
+          <th>UPDATE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% allData.map((item) => { %>
+        <tr>
+          <td><%= item._id %></td>
+          <td><%= item.f_name %></td>
+          <td><%= item.gender %></td>
+          <td><%= item.hobby%></td>
+          <td><%= item.city %></td>
+          <td>
+            <button>
+              <a href="/deleteData?delete=<%= item._id %>">DELETE</a>
+            </button>
+            </td>
+            <td>
+
+              <button>
+                <a href="/updateData?updatei=<%= item._id %>">UPDATE</a>
+              </button>
+            </td>
+      
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
